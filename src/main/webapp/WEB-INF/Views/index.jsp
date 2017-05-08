@@ -8,6 +8,7 @@
 </head>
 <body>
 <%@include file="Shared/Header.jsp"%>
+
 <div class="container">
   <br>
   <div id="myCarousel"  class="carousel slide" data-ride="carousel">
@@ -49,6 +50,7 @@
 </div>
 <div>
 <%@include file="Shared/Footer.jsp" %>
+<jsp:include page="admin/adminHome.jsp"></jsp:include>
 </div>
 </body>
 </html>

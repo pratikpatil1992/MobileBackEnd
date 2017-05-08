@@ -9,7 +9,7 @@
 <body>
 <%@include file="Shared/Header.jsp" %>
 
-<form action="index.jsp" method="post">
+<form action="index.jsp" method="post"></form>
 <input type="text" id="firstname" name="firstname" placeholder="First Name"/><p>
 <input type="text" id="lastname" name="lastname" placeholder="Last Name"/><p>
 <input type="text" id="city" name="city" placeholder="City"/><p>

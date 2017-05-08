@@ -1,12 +1,22 @@
 package com.niit.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.niit.MobileStoreBackEnd.dao.CategoryDAO;
+import com.niit.MobileStoreBackEnd.domain.Category;
+
 @Controller
-public class HomeController 
+public class HomeController
 {
-     @RequestMapping("/")
+     @Autowired HttpSession session;
+     @Autowired Category category;
+     @Autowired CategoryDAO categoryDAO;
+	  
+	 @RequestMapping("/")
 	 public String home()
      {
     	 return "index";
