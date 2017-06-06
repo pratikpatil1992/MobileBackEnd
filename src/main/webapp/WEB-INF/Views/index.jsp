@@ -46,11 +46,9 @@
   </div>
 </div>
 <div>
-<h2><center>Welcome to the homepage. Click on any link.</center></h2>
 </div>
 <div>
 <%@include file="Shared/Footer.jsp" %>
-<jsp:include page="admin/adminHome.jsp"></jsp:include>
 </div>
 </body>
 </html>

@@ -28,15 +28,7 @@
     </div>
 
     <div class="item">
-      <img src="resources/Images/Brands/Asus.bmp" alt="Asus">
-    </div>
-
-    <div class="item">
-      <img src="resources/Images/Brands/Microsoft.bmp" alt="Microsoft">
-    </div>
-
-    <div class="item">
-      <img src="resources/Images/Brands/OnePlus.bmp" alt="OnePlus">
+      <img src="resources/Images/Brands/Motorola.bmp" alt="Motorola">
     </div>
     
     <div class="item">

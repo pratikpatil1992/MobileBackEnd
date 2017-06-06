@@ -8,8 +8,8 @@
 </head>
 <body>
 <%@include file="Shared/Header.jsp" %>
-<img src="Images/Contact/ContactImage.jpg" alt="Image"> </img>
-<h2>Our founder is a mechanical engineer from Navi Mumbai.<p>We have been in the mobile handset industry for many years.</h2>
+<img src="<c:url value="/resources/Images/AboutUs/AboutUs.JPG" />"/>
+<h2>Our founder is an engineer from Navi Mumbai.<p>We have been in the mobile handset industry for many years.</h2>
 <%@include file="Shared/Footer.jsp" %>
 </body>
 </html>

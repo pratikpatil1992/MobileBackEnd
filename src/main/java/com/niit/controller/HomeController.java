@@ -1,13 +1,20 @@
 package com.niit.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.MobileStoreBackEnd.dao.CategoryDAO;
+import com.niit.MobileStoreBackEnd.dao.ProductDAO;
 import com.niit.MobileStoreBackEnd.domain.Category;
+import com.niit.MobileStoreBackEnd.domain.Product;
 
 @Controller
 public class HomeController
@@ -15,11 +22,14 @@ public class HomeController
      @Autowired HttpSession session;
      @Autowired Category category;
      @Autowired CategoryDAO categoryDAO;
+     @Autowired ProductDAO productDAO;
 	  
-	 @RequestMapping("/")
-	 public String home()
+	 @RequestMapping(value = {"/","/MobileStore"})
+	 public ModelAndView goToHome()
      {
-    	 return "index";
+		 ModelAndView mv=new ModelAndView("index");
+		 mv.addObject("message","Welcome to the Mobile Store");
+		 return mv;
      }
      @RequestMapping("/AboutUs")
      public String about()
@@ -31,14 +41,15 @@ public class HomeController
      {
     	 return "Contact";
      }
-     @RequestMapping("/SignUp")
-     public String signup()
+     @RequestMapping("/Products")
+     public String products()
      {
-    	 return "SignUp";
+    	 return "Products";
      }
      @RequestMapping("/Login")
-     public String login()
+     public String login(Model model)
      {
+    	 model.addAttribute("isUserClickedLogin","true");
     	 return "Login";
      }
      @RequestMapping("/Brands")
@@ -46,5 +57,25 @@ public class HomeController
      {
     	 return "Brands";
      }
+     @RequestMapping("/Admin")
+     public String admin()
+     {
+    	 return "admin/adminHome";
+     }
+     @RequestMapping("/Cart")
+     public String cart()
+     {
+    	 return "Cart";
+     }
+     
+    @RequestMapping(value="/search")
+ 	public ModelAndView search(@RequestParam("name") String name)
+ 	{
+ 		
+ 		List<Product> prod=productDAO.search(name);
+ 		System.out.println(prod);
+ 		ModelAndView mv= new ModelAndView("/admin/Product","productList",prod);
+ 		return mv;
+ 		
+ 	}
 }
-
