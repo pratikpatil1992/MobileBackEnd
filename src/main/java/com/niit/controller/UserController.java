@@ -54,7 +54,7 @@ public class UserController
 		 }
 		 else
 		 {
-			 user.setRole("role_user");
+			 user.setRole("ROLE_USER");
 			 boolean saved= userDAO.save(user);
 			 if(saved)
 			 {
@@ -77,9 +77,6 @@ public class UserController
 	public String Logout(Model model)
 	{
 		model.addAttribute("msg", "Logged out successfully");
-		session.removeAttribute("LoggedInUser");
-		session.removeAttribute("isAdmin");
-		session.removeAttribute("isUser");
 		return "Login";
 	}
 	

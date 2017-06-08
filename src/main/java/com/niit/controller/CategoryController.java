@@ -100,7 +100,6 @@ public class CategoryController
 		Category cat =categoryDAO.getCategoryById(id);
 		mv.addObject("category", cat);
 		mv.addObject("isEdit",true);
-		
 		return mv;		
 	}
 	

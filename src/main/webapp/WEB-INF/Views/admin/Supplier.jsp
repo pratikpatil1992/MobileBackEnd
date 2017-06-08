@@ -11,17 +11,18 @@
 <body>
 <jsp:include page="..\Shared\Header.jsp" />
 <h2>  Manage Suppliers  </h2>    
-
+<c:if test="${empty isEdit}">
 <div id="CreateSupplier">
 
-	<form action="manage_supplier_add" method="get">
+	<form action="<c:url value='/manage_supplier_add'/>" method="post">
 
 		<input type="text" name="id" placeholder="ID"> 
 		<input type="text" name="name" placeholder="Name">
 		<input type="text" name="address" placeholder="Address">
-		 <input type="submit" value="Create Supplier">
+		<input type="submit" value="Create Supplier">
 	</form>	
 </div>	
+</c:if>
 <c:url var="saveUrl" value="/admin/Supplier" />
 <div>
 ${msg}
@@ -60,14 +61,14 @@ ${msg}
 </div>	
 
 	<h2> Delete / Update the Suppliers  </h2>
-	<div id="ShowSuppliers">
+	<div id="ShowSuppliers" class="table-responsive">
 	
-		<table border="2">
+		<table class="table">
 		<thead>
 		<tr>
-		<td> Supplier ID</td>
-		<td> Supplier Name</td>
-		<td> Supplier Address </td>
+		<td align="center"> Supplier ID</td>
+		<td align="center"> Supplier Name</td>
+		<td align="center"> Supplier Address </td>
 		
 		</tr>
 		</thead>
@@ -75,18 +76,18 @@ ${msg}
 	<c:forEach var="supplier" items="${supplierList}">
 	
 	<tr>  
-	 <td> ${supplier.id} </td>
-	  <td> ${supplier.name} </td>
-	   <td> ${supplier.address} </td>
+	 <td align="center"> ${supplier.id} </td>
+	  <td align="center"> ${supplier.name} </td>
+	   <td align="center"> ${supplier.address} </td>
 	   
 	 <%--   <td> <a href="manage_supplier_delete/${supplier.id}"> Delete | </a>   
 	   <a href="manage_supplier_edit/${supplier.id}"> Edit  </a>    </td> --%>
 	   
 	   <td>
 	   
-	  <td><a href="<c:url value='/manage_supplier_edit/${supplier.id}' />">Edit</a></td>
+	  <td align="center"><a href="<c:url value='/manage_supplier_edit/${supplier.id}' />">Edit</a></td>
 					
-	  <td><a href="<c:url value='/manage_supplier_delete/${supplier.id}' />">Delete</a></td>
+	  <td align="center"><a href="<c:url value='/manage_supplier_delete/${supplier.id}' />">Delete</a></td>
 	
 	</tr>
 	</c:forEach>

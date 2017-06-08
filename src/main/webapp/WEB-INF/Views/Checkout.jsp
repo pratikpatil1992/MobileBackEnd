@@ -7,6 +7,6 @@
 <title>Checkout</title>
 </head>
 <body>
-<h2>Thank you for your order. Cash on delivery is available. Amount=${total}.</h2>
+<h2>Thank you for your order. Cash on delivery is available. Your order will be delivered to ${address}. </h2>
 </body>
 </html>

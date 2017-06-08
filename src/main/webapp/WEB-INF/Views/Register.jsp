@@ -14,16 +14,24 @@
 	
 <c:url var="saveUrl" value="/register" />
 <div>
+<center>
 ${msg}
-<form:form action="Register" method="post" modelAttribute="user">
-<form:label path="name">Name</form:label><form:input path="name" />
-<form:label path="username">UserName</form:label><form:input path="username" />
-<form:label path="password">Password</form:label><form:input path="password" />
-<form:label path="mail">Mail</form:label><form:input path="mail" />
-<form:label path="phone">Phone</form:label><form:input path="phone" />
+<form:form cssClass="form-inline" action="Register" method="post" modelAttribute="user">
+<form:label path="name">Name</form:label>
+<form:input cssClass="form-control" style="width:200px" path="name" /><br>
+<form:label path="username">Username</form:label>
+<form:input cssClass="form-control" style="width:200px" path="username" /><br>
+<form:label path="password">Password</form:label>
+<form:input cssClass="form-control" style="width:200px" path="password" /><br>
+<form:label path="mail">Mail</form:label>
+<form:input cssClass="form-control" style="width:200px" path="mail" /><br>
+<form:label path="phone">Phone</form:label>
+<form:input cssClass="form-control" style="width:200px" path="phone" /><br>
+<form:label path="address">Address</form:label>
+<form:input cssClass="form-control" style="width:200px" path="address" />
 <input type="submit" value="Submit" />
 </form:form>
-  
+</center></div>
 <%@include file="Shared/Footer.jsp" %>
 </body>
 </html>

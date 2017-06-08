@@ -11,7 +11,7 @@
 <body>
 <jsp:include page="..\Shared\Header.jsp" />
 <h2>  Manage Categories  </h2>    
-
+<c:if test="${empty isEdit}">
 <div id="CreateCategory">
 
 	<form action="manage_category_add" method="get">
@@ -22,12 +22,14 @@
 		 <input type="submit" value="Create Category">
 	</form>	
 </div>	
+</c:if>
 <c:url var="saveUrl" value="/admin/Category" />
-<div>
+
+<div class="table-responsive">
 ${msg}
 
 	<form:form modelAttribute="category" method="POST" action="${saveUrl}">
- <table>
+ <table class="table">
   <tr>
    <td><form:label path="id">Id:</form:label></td>
    <td><form:input path="id" /></td>
@@ -58,16 +60,16 @@ ${msg}
 </form:form>
 	
 </div>	
-
+<
 	<h2> Delete / Update the Categories  </h2>
-	<div id="ShowCategories">
+	<div id="ShowCategories" class="table-responsive">
 	
-		<table border="2">
+		<table class="table">
 		<thead>
 		<tr>
-		<td> Category ID</td>
-		<td> Category Name</td>
-		<td> Category Description </td>
+		<td align="center"> Category ID</td>
+		<td align="center"> Category Name</td>
+		<td align="center"> Category Description </td>
 		
 		</tr>
 		</thead>
@@ -75,18 +77,18 @@ ${msg}
 	<c:forEach var="category" items="${categoryList}">
 	
 	<tr>  
-	 <td> ${category.id} </td>
-	  <td> ${category.name} </td>
-	   <td> ${category.description} </td>
+	 <td align="center"> ${category.id} </td>
+	  <td align="center"> ${category.name} </td>
+	   <td align="center"> ${category.description} </td>
 	   
 	 <%--   <td> <a href="manage_category_delete/${category.id}"> Delete | </a>   
 	   <a href="manage_category_edit/${category.id}"> Edit  </a>    </td> --%>
 	   
 	   <td>
 	   
-	  <td><a href="<c:url value='/manage_category_edit/${category.id}' />">Edit</a></td>
+	  <td align="center"><a href="<c:url value='/manage_category_edit/${category.id}' />">Edit</a></td>
 					
-	  <td><a href="<c:url value='/manage_category_delete/${category.id}' />">Delete</a></td>
+	  <td align="center"><a href="<c:url value='/manage_category_delete/${category.id}' />">Delete</a></td>
 	
 	</tr>
 	</c:forEach>
@@ -94,6 +96,7 @@ ${msg}
 	</table>
 	
 	</div>
+	
 <jsp:include page="..\Shared\Footer.jsp" />
 </body>
 </html>

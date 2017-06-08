@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Manage Products</title>
 </head>
-<body>
+<body">
 <jsp:include page="..\Shared\Header.jsp" />
 <c:if test="${isAdmin}"><h2>  Manage Products  </h2>   </c:if>
 <c:if test="${empty isEditing}">	
@@ -18,11 +18,11 @@
 <c:if test="${not empty isEditing}">	
 		<c:url var="saveUrl" value="/admin/editProduct" />
 </c:if>
-<div id="UpdateProduct">
+<div id="UpdateProduct" class="table-responsive">
 ${msg}
 <c:if test="${isAdmin}">
 <form:form  modelAttribute="product" enctype="multipart/form-data" method="POST" action="${saveUrl}">
- <table>
+ <table class="table">
   <tr>
    <td><form:label path="id">Id:</form:label></td>
    <td><form:input path="id" /></td>
@@ -83,13 +83,13 @@ ${msg}
   </tr>
   
    <tr>
-   <td colspan="3">
+   <td colspan="5">
 
  <c:if test="${not empty isEditing}">
- <input type="submit" value="Update" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+ <input type="submit" value="Update" />
  </c:if>
  <c:if test="${empty isEditing}">
- <input type="submit" value="Add" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+ <input type="submit" value="Add" />
  </c:if>
  </td>
  </table> 
@@ -98,21 +98,21 @@ ${msg}
 </div>	
 
 	<c:if test="${isAdmin}"><h2> Delete / Update the Products  </h2></c:if>
-	<div id="ShowProducts">
+	<div id="ShowProducts" class="table-responsive">
 	
-		<table border="2">
+		<table class="table">
 		<thead>
 		<tr>
+		<td></td>
 		<c:if test="${isAdmin}">
 		<td> Product ID</td>
 		</c:if>
-		<td></td>
-		<td> Product Name</td>
-		<td> Product Description</td>
-		<td> Price</td>
+		<td align="center"> Product Name</td>
+		<td align="center"> Product Description</td>
+		<td align="center"> Price</td>
 		<c:if test="${isAdmin}">
-		<td> Category ID </td>
-		<td> Supplier ID </td>
+		<td align="center"> Category ID </td>
+		<td align="center"> Supplier ID </td>
 		</c:if>
 		</tr>
 		</thead>
@@ -120,30 +120,31 @@ ${msg}
 	 <c:forEach var="product" items="${productList}">
 	
 	 <tr> 
-	 <td>  <img height="100" width="100" src="resources/Images/ProductImages/${product.imagepath}"/></td> 
+	 <td>  <img height="100" width="100" src="<c:url value='/resources/Images/ProductImages/${product.imagepath}' /> "/></td> 
 	 <c:if test="${isAdmin}">
-	 <td> ${product.id} </td>
+	 <td align="center"> ${product.id} </td>
 	 </c:if>
-	 <td> ${product.name} </td>
-	 <td> ${product.description} </td>
-	 <td> ${product.price} </td>
+	 <td align="center"> ${product.name} </td>
+	 <td align="center"> ${product.description} </td>
+	 <td align="center"> ${product.price} </td>
 	 <c:if test="${isAdmin}">
-	 <td> ${product.category_id} </td>
-	 <td> ${product.supplier_id} </td>
+	 <td align="center"> ${product.category_id} </td>
+	 <td align="center"> ${product.supplier_id} </td>
 	  </c:if> 
 	 <%--   <td> <a href="manage_product_delete/${product.id}"> Delete | </a>   
 	   <a href="manage_product_edit/${product.id}"> Edit  </a>    </td> --%>
 	   
 	   <td>
-<c:if test="${isAdmin}">	   
-	  <td><a href="<c:url value='/manage_product_edit/${product.id}' />">Edit</a></td>
+<c:if test="${isAdmin}">	
+   
+	  <td align="center"><a href="<c:url value='/manage_product_edit/${product.id}' />">Edit</a></td>
 					
-	  <td><a href="<c:url value='/manage_product_delete/${product.id}' />">Delete</a></td>
+	  <td align="center"><a href="<c:url value='/manage_product_delete/${product.id}' />">Delete</a></td>
 </c:if>
 
-	  <td><a href="<c:url value='/product_view/${product.id}' />">View</a></td>
+	  <td align="center"><a href="<c:url value='/product_view/${product.id}' />">View</a></td>
 <c:if test="${isUser}">
-	  <td><a href="<c:url value='/add_to_cart/${product.id}' />">Add To Cart</a></td>
+	  <td align="center"><a href="<c:url value='/add_to_cart/${product.id}' />">Add To Cart</a></td>
 </c:if>
 	</tr>
 

@@ -10,33 +10,37 @@
 </head>
 <body>
 <%@include file="Shared/Header.jsp" %>
-<div id="ShowCart">
+<c:if test="${not empty cartList}"> 
+<div id="ShowCart" class="table-responsive">
 	
-		<table border="2">
+		<table class="table">
 		<thead>
 		<tr>
-		<td>Name</td>
-		<td>Price</td>
+		<td align="center">Name</td>
+		<td align="center">Price</td>
 		</tr>
 		</thead>
 		
 	 <c:forEach var="cart" items="${cartList}">
 	
 	 <tr> 
-	 <td> ${cart.product_Name} </td>
-	 <td> ${cart.price} </td>
-	 <td><a href="<c:url value='/cart_delete/${cart.id}' />">Delete</a></td>
+	 <td align="center"> ${cart.product_Name} </td>
+	 <td align="center"> ${cart.price} </td>
+	 <td align="center"><a href="<c:url value='/cart_delete/${cart.id}' />">Delete</a></td>
 	</tr>
 	</c:forEach>
 	<tr>
 	<td></td>
-	<td>Total</td>
-	<td>${total}</td>
+	<td align="center"><b>Total<b></b></td>
+	<td align="center"><b>${total}</b></td>
 	</tr>
 	</table>
 	</div>
-	<h3><a href="<c:url value='/Checkout/' />">Checkout</a></h3>
-
+	<h3 align="center"><a href="<c:url value='/Checkout/' />">Checkout</a></h3>
+</c:if>
+<c:if test="${empty cartList}">
+<h2>No items in cart</h2>
+</c:if>
 <%@include file="Shared/Footer.jsp" %>
 </body>
 </html>

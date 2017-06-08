@@ -1,5 +1,7 @@
 package com.niit.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -96,7 +98,14 @@ public class ProductController
 		return mv;	
 	}
 	
-	//Post method to store edited product
+	@RequestMapping(value="/brands_view/{id}", method=RequestMethod.GET)
+	public ModelAndView showProduct(@PathVariable("id")String id)
+	{
+		List<Product> prod=productDAO.getProductByCategoryId(id);
+	 	ModelAndView mv= new ModelAndView("/admin/Product","productList",prod);
+	 	mv.addObject("product",prod);
+	 	return mv;
+	}
 
 	@RequestMapping(value="/admin/editProduct", method=RequestMethod.POST)
 	public ModelAndView editProduct(@ModelAttribute("product") @Valid Product prod, BindingResult result,Model model,HttpServletRequest request)

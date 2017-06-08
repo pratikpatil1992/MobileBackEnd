@@ -13,17 +13,20 @@
 <h2>Login</h2>
 <c:url var="login" value='j_spring_security_check'/>
 	
-<div>
+<div class="container" >
+<center>
 ${msg}
 <form action="${login}" method="post">
-<input type="text" name="username"/>
-<input type="password" name="password"/>
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-									
-<input type="submit" value="Submit" />
+<input class="form-control" style="width:200px"  type="text" name="username" placeholder="Username"/>
+<br/>
+<input class="form-control" style="width:200px"  type="password" name="password" placeholder="Password"/>
+
+									<br/>
+<button  type="submit" value="submit" class="btn btn-default">Submit</button>
 
 
 </form>
+</center>
  </div>
 <%@include file="Shared/Footer.jsp" %>
 </body>

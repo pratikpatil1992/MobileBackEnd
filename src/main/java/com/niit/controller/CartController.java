@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.MobileStoreBackEnd.dao.CartDAO;
+import com.niit.MobileStoreBackEnd.dao.OrdersDAO;
 import com.niit.MobileStoreBackEnd.dao.ProductDAO;
+import com.niit.MobileStoreBackEnd.dao.UserDAO;
 import com.niit.MobileStoreBackEnd.domain.Cart;
+import com.niit.MobileStoreBackEnd.domain.Orders;
 import com.niit.MobileStoreBackEnd.domain.Product;
 
 @Controller
@@ -21,6 +24,8 @@ public class CartController
 {
 	@Autowired CartDAO cartDAO;
 	@Autowired ProductDAO productDAO;
+	@Autowired OrdersDAO ordersDAO;
+	@Autowired UserDAO userDAO;
 	@Autowired Cart cart;
 	@Autowired private HttpSession session;
 	
@@ -43,7 +48,6 @@ public class CartController
 		if(saved)
 			mv.addObject("msg","Added Sucessfully To Cart");
 		double total=cartDAO.getTotalAmount((String)session.getAttribute("LoggedInUser"));
-		mv.addObject("total",total);
 		setData();
 		return mv;
 	 }
@@ -76,11 +80,31 @@ public class CartController
 	//	log.debug("You are going to checkout " + id);
 		ModelAndView mv = new ModelAndView("Checkout");
 		log.debug("Ending of the method delete");
+		Orders ord=new Orders();
+		ord.setId(ordersDAO.getMaxId()+1);
+		ord.setPrice(cart.getPrice());
+		ord.setProduct_Id(cart.getProduct_Id());
+		ord.setProduct_Name(cart.getProduct_Name());
+		ord.setQuantity(cart.getQuantity());
+		ord.setUsername(cart.getUsername());
+		ordersDAO.save(ord);
+		cartDAO.deleteCartByUsername((String)session.getAttribute("LoggedInUser"));
+		String address=userDAO.getAddressByUsername((String)session.getAttribute("LoggedInUser"));
+		double total=cartDAO.getTotalAmount((String)session.getAttribute("LoggedInUser"));
+		mv.addObject("total",total);
+		mv.addObject("address",address);
 		return mv;
 	}
 	
 	private void setData()
 	{
-		session.setAttribute("cartList", cartDAO.list());
+		session.setAttribute("cartList", cartDAO.list((String)session.getAttribute("LoggedInUser")));
 	}
+	
+	@RequestMapping("/Cart")
+    public String cart()
+    {
+		setData();
+   	 	return "Cart";
+    }
 }

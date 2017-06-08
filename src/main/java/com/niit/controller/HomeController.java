@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.niit.MobileStoreBackEnd.dao.CartDAO;
 import com.niit.MobileStoreBackEnd.dao.CategoryDAO;
 import com.niit.MobileStoreBackEnd.dao.ProductDAO;
 import com.niit.MobileStoreBackEnd.domain.Category;
@@ -23,10 +24,14 @@ public class HomeController
      @Autowired Category category;
      @Autowired CategoryDAO categoryDAO;
      @Autowired ProductDAO productDAO;
-	  
+	 @Autowired CartDAO cartDAO;
+	 
 	 @RequestMapping(value = {"/","/MobileStore"})
 	 public ModelAndView goToHome()
      {
+		 session.setAttribute("productList", productDAO.list());
+		 session.setAttribute("categoryList", categoryDAO.list());
+		
 		 ModelAndView mv=new ModelAndView("index");
 		 mv.addObject("message","Welcome to the Mobile Store");
 		 return mv;
@@ -62,11 +67,7 @@ public class HomeController
      {
     	 return "admin/adminHome";
      }
-     @RequestMapping("/Cart")
-     public String cart()
-     {
-    	 return "Cart";
-     }
+     
      
     @RequestMapping(value="/search")
  	public ModelAndView search(@RequestParam("name") String name)
